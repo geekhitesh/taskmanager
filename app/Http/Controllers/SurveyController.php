@@ -11,7 +11,7 @@ use App\Http\Model;
 use Mail;
 use URL;
 
-set_time_limit(2000);
+set_time_limit(20000);
 
 class SurveyController extends Controller
 {
@@ -61,6 +61,7 @@ class SurveyController extends Controller
 			$emp['survey_user_link'] = url('/') . "/survey/fill/".$emp_link;
 			$emp['email'] = $emp_email;
 			
+			echo "Survey sent to: $emp_email<br/>";
 			Mail::send('email_survey_create', ['emp' => $emp], function($message) use ($emp) {
 				$message->to($emp['email'])->subject('Employee Engagement Survey');
 				$message->from('hr@buniyad.com');

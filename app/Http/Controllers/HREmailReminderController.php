@@ -14,8 +14,8 @@ class HREmailReminderController extends Controller
 	
 	public function regularisationLockReminder()
 	{
-			
-		$day = date("d");			
+		$today = date("Y-m-d");	
+		echo $day = date("d");			
 		$total_days = date("t");
 		
 		$regularization = array("07", "14", "21",$total_days);
@@ -26,7 +26,8 @@ class HREmailReminderController extends Controller
 		
 		if(in_array($day,$regularization))
 		{
-			$today = date("Y-m-d");
+			echo "<br/>In Regularisation Process";
+			
 			//$today =mktime(10, 10, 10,10, 9, 2017);
 			//echo $today = date("Y-m-d",strtotime($today1."-12 days"));
 			
@@ -38,18 +39,19 @@ class HREmailReminderController extends Controller
 			$regularise['from'] = $from_day;
 			$regularise['to'] = $to_day;
 			$regularise['lock'] = $lock_day;
+			echo "<br/>";
 			var_dump($regularise);
 
 			
 			Mail::send('hr/attendance/regularisation', ['regularise' => $regularise], function($message){
-         		$message->to('circular@buniyad@buniyad.com')->subject('Attendance Regularisation Reminder');
+         		$message->to('circular@buniyad.com')->subject('Attendance Regularisation Reminder');
          		$message->from('hr@buniyad.com');
       		});
 			
 		}
 		else if(in_array($day,$locked))
 		{
-			$today = date("Y-m-d");
+			echo "<br/>In Locked Process";
 			//$today =mktime(10, 10, 10,10, 9, 2017);
 			//echo $today = date("Y-m-d",strtotime($today1."-12 days"));
 			
@@ -61,6 +63,7 @@ class HREmailReminderController extends Controller
 			$regularise['from'] = $from_day;
 			$regularise['to'] = $to_day;
 			//$regularise['lock'] = $lock_day;
+			echo "<br/>";
 			var_dump($regularise);
 			
 			
